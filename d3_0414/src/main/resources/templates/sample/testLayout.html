@@ -1,0 +1,11 @@
+
+<!DOCTYPE html>
+
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+
+
+<th:block th:replace="~{ /layout/basic.html :: setContent(~{this::mymain}) }">
+    <th:block th:fragment="mymain">
+        <h1>MY MAIN2</h1>
+    </th:block>
+</th:block>
