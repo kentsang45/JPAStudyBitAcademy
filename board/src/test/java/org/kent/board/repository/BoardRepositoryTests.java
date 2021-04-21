@@ -12,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
@@ -82,4 +83,44 @@ public class BoardRepositoryTests {
         result.getContent().forEach(b->log.info(b));
     }
 
+    @Test
+    public void testGetBoard(){
+        Board board = boardRepository.getBoard(99L);
+        log.info(board);
+    }
+
+    @Test
+    public void testGetBoardWithReplyCount(){
+        Object[] arr = boardRepository.getBoardWithReplyCount(99L);
+        // 결과는 배열의 배열이다.
+        log.info(Arrays.toString(arr));
+
+        // 페이징 처리 결과
+        Pageable page = PageRequest.of(0, 10, Sort.by("bno").descending());
+        Page<Object[]> result = boardRepository.getBoardPageWithReplyCount(page);
+        result.get().forEach(a -> log.info(Arrays.toString(a)));
+
+    }
+
+    @Test
+    public void testGetBoardPageWithReplyCountAndMember(){
+        // 3단 조인
+//        Pageable page = PageRequest.of(0, 10, Sort.by("bno").descending());
+//        Page<Object[]> result = boardRepository.getBoardPageWithReplyCountAndMember(page);
+//        result.get().forEach(a -> log.info(Arrays.toString(a)));
+    }
+
+    // 하나의 Board, Member, 댓글 수를 가져온다.
+    @Test
+    public void testGetBoardByBno(){
+        Long bno = 100L;
+
+        // 결과는 Object[]이지만 Object
+        Object result = boardRepository.getBoardByBno(bno);
+
+        // 따라서 캐스팅
+        Object[] arr = (Object[]) result;
+
+        log.info(Arrays.toString(arr));
+    }
 }

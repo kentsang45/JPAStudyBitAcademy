@@ -1,28 +1,28 @@
-package org.kent.board.entity;
+package org.kent.guestbook.entity;
+
 
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-@ToString(exclude = "writer")
-@Getter
+@ToString
 @Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-
-public class Board extends BaseEntity{
+@Getter
+public class Guestbook extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long bno;
+    private Long gno;
+
     private String title;
     private String content;
-
-    // writer는 없다... 연관관계로 추가할 예정이다.
-    // FK 로 설계
-    @ManyToOne (fetch = FetchType.LAZY)
-    private Member writer;
+    private String writer;
 
     public void changeTitle(String title){
         this.title = title;
@@ -31,5 +31,5 @@ public class Board extends BaseEntity{
     public void changeContent(String content){
         this.content = content;
     }
-}
 
+}

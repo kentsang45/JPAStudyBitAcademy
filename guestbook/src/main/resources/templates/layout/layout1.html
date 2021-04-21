@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="setMain(main)">
+
+<head>
+    <meta charset="UTF-8">
+    <title>layout1</title>
+</head>
+<body>
+
+
+<div class="header"><h1>HEADER</h1></div>
+<hr/>
+
+<div class="main"><h1>MAIN</h1>
+<th:block th:replace="${main}"></th:block>
+</div>
+<hr/>
+
+<div class="fotter"><h1>FOOTER</h1></div>
+<hr/>
+
+
+</body>
+</html>
